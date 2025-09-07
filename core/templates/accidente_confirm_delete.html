@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Eliminar Accidente</h3>
+<p>¿Eliminar el accidente del <strong>{{ object.fecha }}</strong> ({{ object.tipo }})?</p>
+<form method="post">{% csrf_token %}
+  <button class="btn btn-danger">Eliminar</button>
+  <a class="btn btn-secondary" href="{% url 'core:accidente_list' %}">Cancelar</a>
+</form>
+{% endblock %}
