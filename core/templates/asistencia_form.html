@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>{{ view.object|default:'Nueva Asistencia' }}</h3>
+<form method="post" class="row g-3">{% csrf_token %}
+  {{ form.as_p }}
+  <div>
+    <button class="btn btn-success">Guardar</button>
+    <a class="btn btn-secondary" href="{% url 'core:asistencia_list' %}">Volver</a>
+  </div>
+</form>
+{% endblock %}
