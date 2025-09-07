@@ -48,7 +48,29 @@ class Accidente(models.Model):
     trabajadores = models.ManyToManyField('Trabajador', related_name='accidentes', blank=True)
 
     def __str__(self):
-        return f"{self.fecha} - {self.tipo} ({self.gravedad})"    
+        return f"{self.fecha} - {self.tipo} ({self.gravedad})"
+
+
+class Asistencia(models.Model):
+    trabajador = models.ForeignKey(Trabajador, on_delete=models.RESTRICT, related_name='asistencias')
+    fecha = models.DateField()
+    hora_entrada = models.TimeField(null=True, blank=True)
+    hora_salida = models.TimeField(null=True, blank=True)
+    minutos_atraso = models.PositiveIntegerField(default=0)
+    horas_extras = models.DecimalField(max_digits=5, decimal_places=2, default=0,
+                                       validators=[MinValueValidator(0)])
+    estado = models.CharField(max_length=12, choices=[
+        ('PRESENTE', 'Presente'), ('AUSENTE', 'Ausente'),
+        ('LICENCIA', 'Licencia'), ('VACACIONES', 'Vacaciones')
+    ])
+    observaciones = models.CharField(max_length=255, blank=True)
+
+    class Meta:
+        unique_together = ('trabajador', 'fecha')
+        ordering = ['-fecha']
+
+    def __str__(self):
+        return f"{self.trabajador} - {self.fecha} ({self.estado})"
     
 
 
