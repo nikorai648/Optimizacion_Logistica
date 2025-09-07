@@ -43,7 +43,12 @@ class Accidente(models.Model):
     dias_licencia = models.PositiveIntegerField(default=0, validators=[MaxValueValidator(365)])
     costo_estimado = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
     reportado_a = models.CharField(max_length=120, blank=True)
-    observaciones = models.CharField(max_length=255, blank=True)    
+    observaciones = models.CharField(max_length=255, blank=True)
+
+    trabajadores = models.ManyToManyField('Trabajador', related_name='accidentes', blank=True)
+
+    def __str__(self):
+        return f"{self.fecha} - {self.tipo} ({self.gravedad})"    
     
 
 
