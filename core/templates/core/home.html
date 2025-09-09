@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="p-5 bg-light rounded-3">
+  <h1 class="h4 mb-2">Panel de Control</h1>
+  <p class="mb-4">Sistema de Trabajadores, Asistencias y Accidentes.</p>
+  <div class="d-flex gap-2 flex-wrap">
+    <a class="btn btn-primary" href="{% url 'core:trabajador_list' %}">Trabajadores</a>
+    <a class="btn btn-secondary" href="{% url 'core:asistencia_list' %}">Asistencias</a>
+    <a class="btn btn-dark" href="{% url 'core:accidente_list' %}">Accidentes</a>
+  </div>
+</div>
+{% endblock %}
