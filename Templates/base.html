@@ -18,8 +18,6 @@
         <li class="nav-item"><a class="nav-link" href="{% url 'core:asistencia_list' %}">Asistencias</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'core:accidente_list' %}">Accidentes</a></li>
         <!-- 👇 esta opción de Involucrados ya no corresponde si quitaste el modelo intermedio -->
-        {# <li class="nav-item"><a class="nav-link" href="{% url 'core:ta_list' %}">Involucrados</a></li> #}
-      </ul>
       <ul class="navbar-nav">
         {% if user.is_authenticated %}
           <li class="nav-item"><span class="navbar-text me-3">Hola, {{ user.username }}</span></li>
