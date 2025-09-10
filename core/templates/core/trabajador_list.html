@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-3">
-  <h3>Trabajadores</h3>
+  <div class="d-flex align-items-center">
+    <img src="{% static 'img/trabajador.jpg' %}" class="icono-listado" alt="Trabajadores">
+    <h3 class="mb-0">Trabajadores</h3>
+  </div>
   <a class="btn btn-primary" href="{% url 'core:trabajador_create' %}">Nuevo</a>
 </div>
 <table class="table table-striped">
