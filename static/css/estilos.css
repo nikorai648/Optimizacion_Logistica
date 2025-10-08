@@ -1,19 +1,20 @@
 /* Fondo general */
 body {
-  background-color: lightgreen; /* neutral gris claro o blanco */
-  background-image: url("../img/fondo.jpg"); /* opcional */
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background-color: #e0e0e0; /* gris claro */
+  background-image: url("../img/fondo.jpg");
+  background-repeat: repeat;      /* se repite el patrón */
+  background-size: 40px 40px;     /* altura y ancho fijos */
+  background-position: top left;  /* inicia desde la esquina superior */
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+
 }
 
 /* Fondo del contenido (excluye navbar) */
 main.container {
-  background-color: lightgreen;
+  background-color: #e0e0e0; /* mantiene el gris claro */
   padding: 20px;
-  border-radius: 8px;       /* opcional, bordes redondeados */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* opcional */
+  border-radius: 8px;        /* bordes redondeados opcional */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
