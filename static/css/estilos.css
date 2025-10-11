@@ -1,10 +1,10 @@
 /* Fondo general */
 body {
-  background-color: gray; /* gris de fondo */
-  background-image: url("../img/logo-carran.jpg");
-  background-repeat: repeat;      /* repite el patrón */
-  background-size: 20px 20px;     /* tamaño de cada "bloque" del fondo */
-  background-position: top left;  /* inicia desde la esquina superior izquierda */
+  background-color: #f5f5f5; /* neutral gris claro o blanco */
+  
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
@@ -12,8 +12,8 @@ body {
 
 /* Fondo del contenido (excluye navbar) */
 main.container {
-  background-color: lightgreen; /* color del área de contenido */
+  background-color: beige;
   padding: 20px;
-  border-radius: 8px;        /* bordes redondeados opcional */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 8px;       /* opcional, bordes redondeados */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* opcional */
 }
