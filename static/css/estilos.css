@@ -3,7 +3,8 @@ body {
   background-color: #e0e0e0; /* gris claro */
   background-image: url("../img/logo-carran.jpg");
   background-repeat: repeat;      /* se repite el patrón */
-  background-size: 20px 20px;     /* altura y ancho fijos */
+  width: 20px;
+  height: 20px;
   background-position: top left;  /* inicia desde la esquina superior */
   font-family: Arial, sans-serif;
   margin: 0;
