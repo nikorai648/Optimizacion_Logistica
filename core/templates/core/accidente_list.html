@@ -1,3 +1,4 @@
+<!-- accidente_list.html -->
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
@@ -8,11 +9,12 @@
   </div>
   <a class="btn btn-primary" href="{% url 'core:accidente_create' %}">Nuevo</a>
 </div>
+
 <table class="table table-striped">
   <thead>
-  <tr>
-    <th>Fecha</th><th>Tipo</th><th>Gravedad</th><th>Lugar</th><th>Licencia</th><th></th>
-  </tr>
+    <tr>
+      <th>Fecha</th><th>Tipo</th><th>Gravedad</th><th>Lugar</th><th>Licencia</th><th>Trabajadores (RUTs)</th><th></th>
+    </tr>
   </thead>
   <tbody>
   {% for obj in object_list %}
@@ -22,13 +24,14 @@
       <td>{{ obj.get_gravedad_display }}</td>
       <td>{{ obj.lugar }}</td>
       <td>{% if obj.requiere_licencia %}Sí ({{ obj.dias_licencia }} días){% else %}No{% endif %}</td>
+      <td>{{ obj.trabajadores_rut }}</td>
       <td class="text-end">
         <a class="btn btn-sm btn-secondary" href="{% url 'core:accidente_update' obj.pk %}">Editar</a>
         <a class="btn btn-sm btn-danger" href="{% url 'core:accidente_delete' obj.pk %}">Eliminar</a>
       </td>
     </tr>
   {% empty %}
-    <tr><td colspan="6">Sin registros</td></tr>
+    <tr><td colspan="7">Sin registros</td></tr>
   {% endfor %}
   </tbody>
 </table>
