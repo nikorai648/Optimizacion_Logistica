@@ -52,19 +52,23 @@ class Accidente(models.Model):
     reportado_a = models.CharField(max_length=120, blank=True)
     observaciones = models.CharField(max_length=255, blank=True)
 
-    # Relación N:N con Trabajador (Django crea la tabla intermedia automáticamente)
-    trabajadores = models.ManyToManyField('Trabajador', related_name='accidentes', blank=True)
+    # >>> SIN relaciones: guardamos RUTs en texto (coma-separado)
+    trabajadores_rut = models.CharField(
+        max_length=500,
+        blank=True,
+        help_text="RUTs involucrados separados por comas (ej: 11.111.111-1,22.222.222-2)"
+    )
 
     def __str__(self):
         return f"{self.fecha} - {self.tipo} ({self.gravedad})"
 
 
 class Asistencia(models.Model):
-    trabajador = models.ForeignKey(
-        Trabajador,
-        on_delete=models.RESTRICT,
-        related_name='asistencias'
-    )
+    # >>> SIN ForeignKey: guardamos identificación del trabajador como texto
+    trabajador_rut = models.CharField(max_length=12, help_text="RUT del trabajador")
+    trabajador_nombre = models.CharField(max_length=60)
+    trabajador_apellido = models.CharField(max_length=60)
+
     fecha = models.DateField()
     hora_entrada = models.TimeField(null=True, blank=True)
     hora_salida = models.TimeField(null=True, blank=True)
@@ -82,8 +86,9 @@ class Asistencia(models.Model):
     observaciones = models.CharField(max_length=255, blank=True)
 
     class Meta:
-        unique_together = ('trabajador', 'fecha')  # evita duplicados
-        ordering = ['-fecha']  # últimas asistencias primero
+        # como ya no hay FK, validamos por RUT + fecha
+        unique_together = ('trabajador_rut', 'fecha')
+        ordering = ['-fecha']
 
     def __str__(self):
-        return f"{self.trabajador} - {self.fecha} ({self.estado})"
+        return f"{self.trabajador_nombre} {self.trabajador_apellido} - {self.fecha} ({self.estado})"
