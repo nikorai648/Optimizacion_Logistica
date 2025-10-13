@@ -52,10 +52,11 @@ class Accidente(models.Model):
     reportado_a = models.CharField(max_length=120, blank=True)
     observaciones = models.CharField(max_length=255, blank=True)
 
-    # >>> SIN relaciones: guardamos RUTs en texto (coma-separado)
+    # Sin relaciones: solo texto con RUTs separados por coma
     trabajadores_rut = models.CharField(
         max_length=500,
         blank=True,
+        default='',
         help_text="RUTs involucrados separados por comas (ej: 11.111.111-1,22.222.222-2)"
     )
 
@@ -64,10 +65,23 @@ class Accidente(models.Model):
 
 
 class Asistencia(models.Model):
-    # >>> SIN ForeignKey: guardamos identificación del trabajador como texto
-    trabajador_rut = models.CharField(max_length=12, help_text="RUT del trabajador")
-    trabajador_nombre = models.CharField(max_length=60)
-    trabajador_apellido = models.CharField(max_length=60)
+    # Sin relación ForeignKey
+    trabajador_rut = models.CharField(
+        max_length=12,
+        blank=True,
+        default='',
+        help_text="RUT del trabajador"
+    )
+    trabajador_nombre = models.CharField(
+        max_length=60,
+        blank=True,
+        default=''
+    )
+    trabajador_apellido = models.CharField(
+        max_length=60,
+        blank=True,
+        default=''
+    )
 
     fecha = models.DateField()
     hora_entrada = models.TimeField(null=True, blank=True)
@@ -86,7 +100,6 @@ class Asistencia(models.Model):
     observaciones = models.CharField(max_length=255, blank=True)
 
     class Meta:
-        # como ya no hay FK, validamos por RUT + fecha
         unique_together = ('trabajador_rut', 'fecha')
         ordering = ['-fecha']
 
