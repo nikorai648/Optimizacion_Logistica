@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import DesempenoTrabajador, EficienciaTrabajador, FuncionesSistema, Trabajador, Asistencia, Accidente , Menu, Login, TipoTrabajador, SueldoTrabajador
+from .models import  Trabajador, Asistencia, Accidente 
    
 
 @admin.register(Trabajador)
@@ -26,11 +26,5 @@ class AccidenteAdmin(admin.ModelAdmin):
         return obj.trabajadores_rut
     mostrar_trabajadores.short_description = "Trabajadores (RUTs)"
 
-admin.site.register(Menu)
-admin.site.register(Login)
-admin.site.register(TipoTrabajador)
-admin.site.register(SueldoTrabajador)
-admin.site.register(EficienciaTrabajador)
-admin.site.register(DesempenoTrabajador)
-admin.site.register(FuncionesSistema)
+
 
