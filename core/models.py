@@ -105,3 +105,79 @@ class Asistencia(models.Model):
 
     def __str__(self):
         return f"{self.trabajador_nombre} {self.trabajador_apellido} - {self.fecha} ({self.estado})"
+    
+
+# ===== Tablas adicionales para segunda prueba (sin relaciones) =====
+
+class Menu(models.Model):
+    tipo_usuario = models.IntegerField()
+    menu_col = models.CharField(max_length=45)
+    login_nombre_usuario = models.CharField(max_length=60)  # referencia blanda (texto)
+
+    def __str__(self):
+        return f"{self.menu_col} (tipo {self.tipo_usuario})"
+
+
+class Login(models.Model):
+    nombre_usuario = models.CharField(max_length=60, unique=True)
+    contrasena_usuario = models.CharField(max_length=128)  # (puedes guardar hash)
+    funciones_sistema_busqueda_por_id = models.CharField(max_length=60, blank=True)
+
+    def __str__(self):
+        return self.nombre_usuario
+
+
+class TipoTrabajador(models.Model):
+    rol_o_cargo = models.CharField(max_length=80)
+    tipo_contrato = models.CharField(max_length=45)
+
+    def __str__(self):
+        return f"{self.rol_o_cargo} - {self.tipo_contrato}"
+
+
+class SueldoTrabajador(models.Model):
+    # SIN FK: guardamos identificación textual del trabajador
+    trabajador_rut = models.CharField(max_length=12)
+    trabajador_nombre = models.CharField(max_length=60)
+
+    sueldo_promedio = models.IntegerField()
+    sueldo_por_trabajos_hechos = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.trabajador_nombre} - ${self.sueldo_promedio}"
+
+
+class EficienciaTrabajador(models.Model):
+    trabajador_rut = models.CharField(max_length=12)
+    trabajador_nombre = models.CharField(max_length=60)
+
+    id_eficiencia = models.IntegerField()
+    trabajos_completados_en_1_mes = models.IntegerField(default=0)
+    sueldo_promedio_informado = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.trabajador_nombre} - efic {self.id_eficiencia}"
+
+
+class DesempenoTrabajador(models.Model):
+    trabajador_rut = models.CharField(max_length=12)
+    trabajador_nombre = models.CharField(max_length=60)
+
+    id_desempeno = models.IntegerField()
+    forma_de_hacer_trabajos = models.CharField(max_length=255, blank=True)
+    posibles_quejas = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return f"{self.trabajador_nombre} - desp {self.id_desempeno}"
+
+
+class FuncionesSistema(models.Model):
+    busqueda_por_id = models.IntegerField()
+    eliminar_datos_trabajador = models.CharField(max_length=60, blank=True)
+    agregar_datos_trabajador = models.CharField(max_length=60, blank=True)
+    actualizar_datos_trabajador = models.CharField(max_length=60, blank=True)
+    trabajador_nombre = models.CharField(max_length=60)
+
+    def __str__(self):
+        return f"Funciones de {self.trabajador_nombre}"
+
