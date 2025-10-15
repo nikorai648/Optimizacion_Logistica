@@ -25,4 +25,16 @@ urlpatterns = [
     path('accidentes/<int:pk>/editar/', views.AccidenteUpdate.as_view(), name='accidente_update'),
     path('accidentes/<int:pk>/eliminar/', views.AccidenteDelete.as_view(), name='accidente_delete'),
 
+    # Eficiencia
+    path('eficiencia/', views.EficienciaList.as_view(), name='eficiencia_list'),
+    path('eficiencia/nueva/', views.EficienciaCreate.as_view(), name='eficiencia_create'),
+    path('eficiencia/<int:pk>/editar/', views.EficienciaUpdate.as_view(), name='eficiencia_update'),
+    path('eficiencia/<int:pk>/eliminar/', views.EficienciaDelete.as_view(), name='eficiencia_delete'),
+
+    # Desempeño
+    path('desempeno/', views.DesempenoList.as_view(), name='desempeno_list'),
+    path('desempeno/nuevo/', views.DesempenoCreate.as_view(), name='desempeno_create'),
+    path('desempeno/<int:pk>/editar/', views.DesempenoUpdate.as_view(), name='desempeno_update'),
+    path('desempeno/<int:pk>/eliminar/', views.DesempenoDelete.as_view(), name='desempeno_delete'),
+
 ]
