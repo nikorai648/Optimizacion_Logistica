@@ -5,11 +5,11 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from .models import (
-    Trabajador, Asistencia, Accidente
+    Trabajador, Asistencia, Accidente,EficienciaTrabajador, DesempenoTrabajador
    
 )
 from .forms import (
-    TrabajadorForm, AsistenciaForm, AccidenteForm
+    TrabajadorForm, AsistenciaForm, AccidenteForm, EficienciaTrabajador, DesempenoTrabajador
 )
 
 # Página de inicio
@@ -117,5 +117,67 @@ class AccidenteDelete(DeleteView):
     model = Accidente
     template_name = 'core/accidente_confirm_delete.html'
     success_url = reverse_lazy('core:accidente_list')
+
+
+# ===== Eficiencia =====
+@method_decorator(login_decorators, name='dispatch')
+class EficienciaList(ListView):
+    model = EficienciaTrabajador
+    paginate_by = 10
+    template_name = 'core/eficiencia_list.html'
+
+
+@method_decorator(login_decorators, name='dispatch')
+class EficienciaCreate(CreateView):
+    model = EficienciaTrabajador
+    form_class = EficienciaTrabajadorForm
+    template_name = 'core/eficiencia_form.html'
+    success_url = reverse_lazy('core:eficiencia_list')
+
+
+@method_decorator(login_decorators, name='dispatch')
+class EficienciaUpdate(UpdateView):
+    model = EficienciaTrabajador
+    form_class = EficienciaTrabajadorForm
+    template_name = 'core/eficiencia_form.html'
+    success_url = reverse_lazy('core:eficiencia_list')
+
+
+@method_decorator(login_decorators, name='dispatch')
+class EficienciaDelete(DeleteView):
+    model = EficienciaTrabajador
+    template_name = 'core/eficiencia_confirm_delete.html'
+    success_url = reverse_lazy('core:eficiencia_list')
+
+
+# ===== Desempeño =====
+@method_decorator(login_decorators, name='dispatch')
+class DesempenoList(ListView):
+    model = DesempenoTrabajador
+    paginate_by = 10
+    template_name = 'core/desempeno_list.html'
+
+
+@method_decorator(login_decorators, name='dispatch')
+class DesempenoCreate(CreateView):
+    model = DesempenoTrabajador
+    form_class = DesempenoTrabajadorForm
+    template_name = 'core/desempeno_form.html'
+    success_url = reverse_lazy('core:desempeno_list')
+
+
+@method_decorator(login_decorators, name='dispatch')
+class DesempenoUpdate(UpdateView):
+    model = DesempenoTrabajador
+    form_class = DesempenoTrabajadorForm
+    template_name = 'core/desempeno_form.html'
+    success_url = reverse_lazy('core:desempeno_list')
+
+
+@method_decorator(login_decorators, name='dispatch')
+class DesempenoDelete(DeleteView):
+    model = DesempenoTrabajador
+    template_name = 'core/desempeno_confirm_delete.html'
+    success_url = reverse_lazy('core:desempeno_list')
 
 
