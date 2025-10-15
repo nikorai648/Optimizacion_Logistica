@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>Desempeño de Trabajador</h3>
+  <a class="btn btn-primary" href="{% url 'core:desempeno_create' %}">Nuevo</a>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>RUT</th><th>Nombre</th><th>ID Desempeño</th>
+      <th>Forma de hacer trabajos</th><th>Posibles quejas</th><th></th>
+    </tr>
+  </thead>
