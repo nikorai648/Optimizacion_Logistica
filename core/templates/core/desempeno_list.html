@@ -11,3 +11,22 @@
       <th>Forma de hacer trabajos</th><th>Posibles quejas</th><th></th>
     </tr>
   </thead>
+  <tbody>
+    {% for obj in object_list %}
+      <tr>
+        <td>{{ obj.trabajador_rut }}</td>
+        <td>{{ obj.trabajador_nombre }}</td>
+        <td>{{ obj.id_desempeno }}</td>
+        <td>{{ obj.forma_de_hacer_trabajos }}</td>
+        <td>{{ obj.posibles_quejas }}</td>
+        <td class="text-end">
+          <a class="btn btn-sm btn-secondary" href="{% url 'core:desempeno_update' obj.pk %}">Editar</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'core:desempeno_delete' obj.pk %}">Eliminar</a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="6">Sin registros</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
