@@ -9,7 +9,7 @@ from .models import (
    
 )
 from .forms import (
-    TrabajadorForm, AsistenciaForm, AccidenteForm, EficienciaTrabajador, DesempenoTrabajador
+    TrabajadorForm, AsistenciaForm, AccidenteForm, EficienciaTrabajadorForm, DesempenoTrabajadorForm
 )
 
 # Página de inicio
