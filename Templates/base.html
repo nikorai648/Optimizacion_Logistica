@@ -26,6 +26,8 @@
         <li class="nav-item"><a class="nav-link" href="{% url 'core:trabajador_list' %}">Trabajadores</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'core:asistencia_list' %}">Asistencias</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'core:accidente_list' %}">Accidentes</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'core:eficiencia_list' %}">Eficiencia</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'core:desempeno_list' %}">Desempeño</a></li>
       </ul>
       <ul class="navbar-nav">
         {% if user.is_authenticated %}
