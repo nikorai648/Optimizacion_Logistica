@@ -1,5 +1,5 @@
 from django import forms
-from .models import  Trabajador, Asistencia, Accidente 
+from .models import  Trabajador, Asistencia, Accidente, EficienciaTrabajador, DesempenoTrabajador
 
 class TrabajadorForm(forms.ModelForm):
     class Meta:
@@ -22,3 +22,13 @@ class AccidenteForm(forms.ModelForm):
             "trabajadores_rut": "Lista de RUTs separados por comas.",
         }
 
+class EficienciaTrabajadorForm(forms.ModelForm):
+    class Meta:
+        model = EficienciaTrabajador
+        fields = '__all__'
+
+
+class DesempenoTrabajadorForm(forms.ModelForm):
+    class Meta:
+        model = DesempenoTrabajador
+        fields = '__all__'
