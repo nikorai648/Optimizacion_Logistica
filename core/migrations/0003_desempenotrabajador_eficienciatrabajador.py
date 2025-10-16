@@ -6,8 +6,9 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0002_remove_accidente_trabajadores_and_more'),
-    ]
+    ('core', '0002_remove_accidente_trabajador_and_more'),
+]
+
 
     operations = [
         migrations.CreateModel(
