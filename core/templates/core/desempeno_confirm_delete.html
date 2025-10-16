@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Eliminar Desempeño</h3>
+<p>¿Eliminar el registro de <strong>{{ object.trabajador_nombre }}</strong> (ID {{ object.id_desempeno }})?</p>
+<form method="post">{% csrf_token %}
+    <button class="btn btn-danger">Eliminar</button>
+  <a class="btn btn-secondary" href="{% url 'core:desempeno_list' %}">Cancelar</a>
+</form>
+{% endblock %}
