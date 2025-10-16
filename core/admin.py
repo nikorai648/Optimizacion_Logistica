@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import  Trabajador, Asistencia, Accidente 
+from .models import  Trabajador, Asistencia, Accidente,  EficienciaTrabajador, DesempenoTrabajador
    
 
 @admin.register(Trabajador)
@@ -25,6 +25,19 @@ class AccidenteAdmin(admin.ModelAdmin):
     def mostrar_trabajadores(self, obj):
         return obj.trabajadores_rut
     mostrar_trabajadores.short_description = "Trabajadores (RUTs)"
+
+
+@admin.register(EficienciaTrabajador)
+class EficienciaAdmin(admin.ModelAdmin):
+    list_display = ("trabajador_rut", "trabajador_nombre", "id_eficiencia",
+                    "trabajos_completados_en_1_mes", "sueldo_promedio_informado")
+    search_fields = ("trabajador_rut", "trabajador_nombre")
+
+@admin.register(DesempenoTrabajador)
+class DesempenoAdmin(admin.ModelAdmin):
+    list_display = ("trabajador_rut", "trabajador_nombre", "id_desempeno",
+                    "forma_de_hacer_trabajos", "posibles_quejas")
+    search_fields = ("trabajador_rut", "trabajador_nombre")
 
 
 
