@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 <h3>{{ view.object|default:'Nuevo Desempeño' }}</h3>
-<form method="post" class="row g-3">{% csrf_token %}
+
+<form method="post" class="row g-3">
+  {% csrf_token %}
   {{ form.as_p }}
   <div>
     <button class="btn btn-success">Guardar</button>
+    <a href="{% url 'core:desempeno_list' %}" class="btn btn-secondary">Cancelar</a>
+  </div>
+</form>
+
+{% endblock %}
