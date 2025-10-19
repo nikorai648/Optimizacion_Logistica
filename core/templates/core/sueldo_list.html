@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>Sueldos de Trabajadores</h3>
+  <a class="btn btn-primary" href="{% url 'core:sueldo_create' %}">Nuevo</a>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>RUT</th><th>Nombre</th><th>Mes</th><th>Trabajos/mes</th><th>Sueldo total</th><th></th>
+    </tr>
+  </thead>
+  <tbody>
