@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import  Trabajador, Asistencia, Accidente,  EficienciaTrabajador, DesempenoTrabajador
+from .models import  Trabajador, Asistencia, Accidente,  EficienciaTrabajador, DesempenoTrabajador, SueldoTrabajador
    
 
 @admin.register(Trabajador)

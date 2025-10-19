@@ -1,5 +1,5 @@
 from django import forms
-from .models import  Trabajador, Asistencia, Accidente, EficienciaTrabajador, DesempenoTrabajador
+from .models import  Trabajador, Asistencia, Accidente, EficienciaTrabajador, DesempenoTrabajador, SueldoTrabajador
 
 class TrabajadorForm(forms.ModelForm):
     class Meta:
