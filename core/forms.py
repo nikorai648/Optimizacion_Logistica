@@ -32,3 +32,9 @@ class DesempenoTrabajadorForm(forms.ModelForm):
     class Meta:
         model = DesempenoTrabajador
         fields = '__all__'
+
+
+class SueldoTrabajadorForm(forms.ModelForm):
+    class Meta:
+        model = SueldoTrabajador
+        fields = '__all__'
