@@ -12,3 +12,21 @@
     </tr>
   </thead>
   <tbody>
+  {% for obj in object_list %}
+    <tr>
+      <td>{{ obj.trabajador_rut }}</td>
+      <td>{{ obj.trabajador_nombre }}</td>
+      <td>{{ obj.mes }}</td>
+      <td>{{ obj.cantidad_trabajos_mes }}</td>
+      <td>{{ obj.sueldo_total_mes }}</td>
+      <td class="text-end">
+        <a class="btn btn-sm btn-secondary" href="{% url 'core:sueldo_update' obj.pk %}">Editar</a>
+        <a class="btn btn-sm btn-danger" href="{% url 'core:sueldo_delete' obj.pk %}">Eliminar</a>
+      </td>
+    </tr>
+   {% empty %}
+    <tr><td colspan="6">Sin registros</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}   
