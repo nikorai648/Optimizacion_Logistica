@@ -24,10 +24,10 @@
             <td>{{obj.sueldo_promedio_informado}}</td>
             <td class="text-end">
                 <a class="btn btn-sm btn-secondary" href="{ url 'core:eficiencia_update' obj.pk %}">Editar</a>
-                <a class="btn btn-sm btn-danger" href="{url 'core:eficiencia_delete' obj.pk %}">Eliminar</a>
+                <a class="btn btn-sm btn-danger" href="{ url 'core:eficiencia_delete' obj.pk %}">Eliminar</a>
             </td>
         </tr>
-        { %empty %}
+        { % empty %}
         <tr><td colspan="6">Sin registros</td></tr>
         {% endfor %}
     </tbody>

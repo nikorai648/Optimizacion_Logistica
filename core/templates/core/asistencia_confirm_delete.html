@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 <h3>Eliminar Asistencia</h3>
-<p>¿Eliminar el registro de <strong>{{ object.trabajador }}</strong> del <strong>{{ object.fecha }}</strong>?</p>
+<p>
+  ¿Eliminar el registro de
+  <strong>{{ object.trabajador_nombre }} {{ object.trabajador_apellido }} ({{ object.trabajador_rut }})</strong>
+  del <strong>{{ object.fecha }}</strong>?
+</p>
 <form method="post">{% csrf_token %}
   <button class="btn btn-danger">Eliminar</button>
   <a class="btn btn-secondary" href="{% url 'core:asistencia_list' %}">Cancelar</a>
