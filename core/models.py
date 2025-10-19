@@ -127,3 +127,15 @@ class DesempenoTrabajador(models.Model):
 
     def __str__(self):
         return f"{self.trabajador_nombre} - desp {self.id_desempeno}"
+
+class SueldoTrabajador(models.Model):
+    trabajador_rut = models.CharField(max_length=12)
+    trabajador_nombre = models.CharField(max_length=60)
+    mes = models.CharField(max_length=20, help_text="Mes de cálculo (Ej: Octubre)")
+    cantidad_trabajos_mes = models.PositiveIntegerField(default=0, help_text="Número de trabajos realizados en el mes")
+    tipo_trabajos_mes = models.CharField(max_length=255, help_text="Descripción de los tipos de trabajos realizados")
+    sueldo_total_mes = models.DecimalField(max_digits=12, decimal_places=2, default=0, help_text="Sueldo total correspondiente al mes")
+
+    def __str__(self):
+        return f"{self.trabajador_nombre} - {self.mes} (${self.sueldo_total_mes})"
+
