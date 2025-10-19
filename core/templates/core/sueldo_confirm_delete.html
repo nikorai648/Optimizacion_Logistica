@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Eliminar Sueldo</h3>
+<p>¿Deseas eliminar el registro de <strong>{{ object.trabajador_nombre }}</strong> correspondiente a <strong>{{ object.mes }}</strong>?</p>
+<form method="post">{% csrf_token %}
