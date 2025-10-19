@@ -40,4 +40,11 @@ class DesempenoAdmin(admin.ModelAdmin):
     search_fields = ("trabajador_rut", "trabajador_nombre")
 
 
+@admin.register(SueldoTrabajador)
+class SueldoTrabajadorAdmin(admin.ModelAdmin):
+    list_display = ("trabajador_rut", "trabajador_nombre", "mes", "cantidad_trabajos_mes", "sueldo_total_mes")
+    search_fields = ("trabajador_rut", "trabajador_nombre", "mes")
+
+
+
 
