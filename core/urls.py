@@ -37,4 +37,12 @@ urlpatterns = [
     path('desempeno/<int:pk>/editar/', views.DesempenoUpdate.as_view(), name='desempeno_update'),
     path('desempeno/<int:pk>/eliminar/', views.DesempenoDelete.as_view(), name='desempeno_delete'),
 
+
+    # SueldoTrabajador
+    path('sueldos/', views.SueldoList.as_view(), name='sueldo_list'),
+    path('sueldos/nuevo/', views.SueldoCreate.as_view(), name='sueldo_create'),
+    path('sueldos/<int:pk>/editar/', views.SueldoUpdate.as_view(), name='sueldo_update'),
+    path('sueldos/<int:pk>/eliminar/', views.SueldoDelete.as_view(), name='sueldo_delete'),
+
+
 ]
