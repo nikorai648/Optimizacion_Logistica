@@ -5,11 +5,11 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from .models import (
-    Trabajador, Asistencia, Accidente,EficienciaTrabajador, DesempenoTrabajador
+    Trabajador, Asistencia, Accidente,EficienciaTrabajador, DesempenoTrabajador, SueldoTrabajador
    
 )
 from .forms import (
-    TrabajadorForm, AsistenciaForm, AccidenteForm, EficienciaTrabajadorForm, DesempenoTrabajadorForm
+    TrabajadorForm, AsistenciaForm, AccidenteForm, EficienciaTrabajadorForm, DesempenoTrabajadorForm, SueldoTrabajadorForm
 )
 
 # Página de inicio
@@ -179,5 +179,36 @@ class DesempenoDelete(DeleteView):
     model = DesempenoTrabajador
     template_name = 'core/desempeno_confirm_delete.html'
     success_url = reverse_lazy('core:desempeno_list')
+
+
+@method_decorator(login_required, name='dispatch')
+class SueldoList(ListView):
+    model = SueldoTrabajador
+    paginate_by = 10
+    template_name = 'core/sueldo_list.html'
+
+
+@method_decorator(login_required, name='dispatch')
+class SueldoCreate(CreateView):
+    model = SueldoTrabajador
+    form_class = SueldoTrabajadorForm
+    template_name = 'core/sueldo_form.html'
+    success_url = reverse_lazy('core:sueldo_list')
+
+
+@method_decorator(login_required, name='dispatch')
+class SueldoUpdate(UpdateView):
+    model = SueldoTrabajador
+    form_class = SueldoTrabajadorForm
+    template_name = 'core/sueldo_form.html'
+    success_url = reverse_lazy('core:sueldo_list')
+
+
+@method_decorator(login_required, name='dispatch')
+class SueldoDelete(DeleteView):
+    model = SueldoTrabajador
+    template_name = 'core/sueldo_confirm_delete.html'
+    success_url = reverse_lazy('core:sueldo_list')
+
 
 
