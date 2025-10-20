@@ -1,120 +1,159 @@
  #  Optimizacion y Logística
 
-Sistema de gestión desarrollado en **Django** para administrar **Trabajadores, Asistencias y Accidentes** en una empresa de construcción.  
-Incluye autenticación de usuarios, CRUD completo para cada entidad y un diseño responsivo con **Bootstrap + CSS personalizado**.
+Sistema de gestión desarrollado en Django 5.2.5 para administrar Trabajadores, Asistencias, Accidentes, Desempeños, Eficiencias y Sueldos dentro de una empresa de construcción.
+El sistema permite el control integral de personal con autenticación, CRUD completo y una interfaz moderna con Bootstrap 5 + CSS personalizado.
 
 ---
 
-##  Características principales
--  **Login y Logout** de usuarios (con protección de vistas usando `@login_required`).
--  **Gestión de trabajadores** (alta, edición, baja, listado).
--  **Control de asistencias** con horas extra, atrasos y estados (presente, ausente, licencia, vacaciones).
--  **Registro de accidentes** con detalle de gravedad, lugar, licencia y trabajadores involucrados.
--  **Interfaz con Bootstrap 5** + estilos personalizados en `estilos.css`.
--   Soporte de imágenes e íconos para cada sección.
--   Navegación centralizada mediante menú superior.
+Características principales
 
----
+Autenticación segura de usuarios
 
-##  Estructura del proyecto:
+Login y logout implementados con protección de rutas (@login_required).
+
+Solo usuarios autenticados pueden acceder al sistema.
+
+CRUD completos para todas las entidades:
+
+Trabajador → Registro de datos personales, laborales y de contacto.
+
+Asistencia → Control diario con hora de entrada/salida, atrasos, horas extra y estado.
+
+Accidente → Registro detallado de incidentes, gravedad, costos y observaciones.
+
+Eficiencia del trabajador → Seguimiento de productividad mensual.
+
+Desempeño del trabajador → Evaluación cualitativa sobre forma de trabajo y quejas.
+
+Sueldo del trabajador → Cálculo del sueldo mensual según cantidad y tipo de trabajos realizados.
+
+Diseño responsivo y visual
+
+Interfaz con Bootstrap 5.3.3 y colores personalizados.
+
+Iconos e imágenes representativos en cada módulo (/static/img).
+
+Navegación intuitiva
+
+Menú principal con accesos a todas las secciones.
+
+Botones de acción claros para agregar, editar o eliminar registros.
+
+Validaciones integradas
+
+Modelos y formularios con validaciones de tipo, longitud y rango (validators, choices).
+
+Migración de base de datos
+
+Proyecto capaz de ser migrado, usando MySQL Workbench y credenciales configuradas en settings.py.
+
+
 Optimizacion_Logistica/
 │
-├── core/ # App principal
-│ ├── migrations/
-│ ├── templates/
-│ │ └── core/ # Templates de cada entidad
-│ │ ├── home.html
-│ │ ├── trabajador_list.html
-│ │ ├── asistencia_list.html
-│ │ └── accidente_list.html
-│ ├── static/
-│ │ ├── css/estilos.css
-│ │ └── img/ # Logos e íconos
-│ ├── admin.py
-│ ├── forms.py
-│ ├── models.py
-│ ├── urls.py
-│ └── views.py
+├── core/                         # Aplicación principal
+│   ├── migrations/               # Archivos de migración de Django
+│   ├── templates/core/           # Templates de cada módulo
+│   │   ├── home.html
+│   │   ├── trabajador_*.html
+│   │   ├── asistencia_*.html
+│   │   ├── accidente_*.html
+│   │   ├── desempeno_*.html
+│   │   ├── eficiencia_*.html
+│   │   └── sueldo_*.html
+│   ├── static/                   # Recursos estáticos (CSS / imágenes)
+│   │   ├── css/estilos.css
+│   │   └── img/
+│   ├── admin.py                  # Configuración del panel administrativo
+│   ├── forms.py                  # Formularios de cada modelo
+│   ├── models.py                 # Definición de tablas y validaciones
+│   ├── urls.py                   # Rutas específicas de la app
+│   └── views.py                  # Lógica CRUD (List, Create, Update, Delete)
 │
-├── Optimizacion_Logistica/ # Configuración global
-│ ├── settings.py
-│ ├── urls.py
-│ └── wsgi.py
+├── Optimizacion_Logistica/       # Configuración global del proyecto
+│   ├── settings.py               # Configuración general (MySQL, templates, static, etc.)
+│   ├── urls.py                   # Enrutamiento general
+│   └── wsgi.py                   # Despliegue
 │
-├── db.sqlite3 # Base de datos (SQLite)
-└── manage.py
+├── manage.py                     # Herramienta de ejecución y migraciones
+└── requirements.txt              # Dependencias del entorno
 
 
 ---
 
 ##  Instalación y configuración
 
-### 1. Clonar repositorio
-```bash
+1. Clonar el repositorio
 git clone https://github.com/nikorai648/Optimizacion_Logistica.git
-cd optimizacion-logistica
+cd Optimizacion_Logistica
 
-Crear entorno virtual
+2. Crear entorno virtual
 python -m venv venv
-source venv/bin/activate    # Linux/Mac
-venv\Scripts\activate       # Windows
+venv\Scripts\activate  # Windows
+# o
+source venv/bin/activate  # Linux/Mac
 
-Instalar dependencias
+3. Instalar dependencias
 pip install -r requirements.txt
 
-Migrar base de datos
+4. Configurar base de datos MySQL
+
+En Optimizacion_Logistica/settings.py ya se encuentra configurado el acceso a MySQL:
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'optimizacion_logistica',
+        'USER': 'django_user',
+        'PASSWORD': '6487063a1234',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
+
+
+💡 En MySQL Workbench debe existir la base de datos optimizacion_logistica y el usuario django_user.
+
+5. Aplicar migraciones
 python manage.py makemigrations
 python manage.py migrate
 
-Crear superusuario
+6. Crear usuario administrador
 python manage.py createsuperuser
 
-Levantar servidor de desarrollo
+7. Iniciar el servidor
 python manage.py runserver
 
-Autenticación
 
-Acceder al login en: /accounts/login/
+Luego accede a:
 
-Logout implementado vía formulario POST en la barra de navegación.
+Panel admin: http://127.0.0.1:8000/admin/
 
-Solo usuarios autenticados pueden acceder a CRUD de trabajadores, asistencias y accidentes.
+Aplicación principal: http://127.0.0.1:8000/
 
- Estilos e imágenes
+🧑‍💻 Módulos del sistema
+Módulo	Descripción	Principales campos
+Trabajador	Gestión de datos personales y laborales.	rut, nombre, cargo, turno, estado
+Asistencia	Registro diario de asistencia y horas extra.	fecha, estado, hora_entrada, hora_salida
+Accidente	Detalle de incidentes y gravedad.	fecha, tipo, gravedad, lugar, dias_licencia
+Desempeño	Evaluación de la forma de trabajo del empleado.	trabajador_rut, forma_de_hacer_trabajos, posibles_quejas
+Eficiencia	Registra cantidad de trabajos completados y sueldos promedio.	trabajos_completados_en_1_mes, sueldo_promedio_informado
+Sueldo	Nuevo módulo agregado: relaciona sueldo con tipo y cantidad de trabajos del mes.	mes, cantidad_trabajos_mes, tipo_trabajos_mes, sueldo_total_mes
+🎨 Interfaz y estética
 
-Bootstrap 5.3.3 cargado vía CDN.
+Herencia de templates usando {% extends 'base.html' %}.
 
-Estilos personalizados en static/css/estilos.css.
+Protección CSRF en formularios mediante {% csrf_token %}.
 
-Fondo beige aplicado solo al contenido principal (<main>).
+Imágenes organizadas en static/img/ (trabajador, asistencia, accidente, etc.).
 
-Logos e íconos en static/img/.
+Diseño adaptado: fondo claro, botones diferenciados por color y tipografía limpia.
 
-Funcionalidades CRUD
-Trabajador
+🧩 Requisitos técnicos
 
-Crear, editar, eliminar, listar.
-
-Atributos: rut, nombre, apellido, cargo, contrato, turno, sueldo, etc.
-
-Asistencia
-
-Relación 1:N con trabajador.
-
-Atributos: fecha, hora entrada, hora salida, atraso, horas extra, estado, observaciones.
-
-Accidente
-
-Relación N:N con trabajadores.
-
-Atributos: fecha, tipo, gravedad, lugar, licencia, días de licencia, costo, observaciones.
-
- Requisitos técnicos
-
-Python 3.10+ (probado en 3.13)
+Python 3.13+
 
 Django 5.2.5
 
-Bootstrap 5.3.3
+MySQL 8.0+
 
-Base de datos: SQLite (por defecto)
+Bootstrap 5.3.3
