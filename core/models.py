@@ -52,7 +52,7 @@ class Accidente(models.Model):
     reportado_a = models.CharField(max_length=120, blank=True)
     observaciones = models.CharField(max_length=255, blank=True)
 
-    # Sin relaciones: solo texto con RUTs separados por coma
+  
     trabajadores_rut = models.CharField(
         max_length=500,
         blank=True,
@@ -65,7 +65,7 @@ class Accidente(models.Model):
 
 
 class Asistencia(models.Model):
-    # Sin relación ForeignKey
+   
     trabajador_rut = models.CharField(
         max_length=12,
         blank=True,
