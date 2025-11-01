@@ -1,214 +1,263 @@
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-from django.shortcuts import render
-from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-
 from .models import (
-    Trabajador, Asistencia, Accidente,EficienciaTrabajador, DesempenoTrabajador, SueldoTrabajador
-   
+    Trabajador, Asistencia, Accidente,
+    EficienciaTrabajador, DesempenoTrabajador, SueldoTrabajador
 )
 from .forms import (
-    TrabajadorForm, AsistenciaForm, AccidenteForm, EficienciaTrabajadorForm, DesempenoTrabajadorForm, SueldoTrabajadorForm
+    TrabajadorForm, AsistenciaForm, AccidenteForm,
+    EficienciaTrabajadorForm, DesempenoTrabajadorForm, SueldoTrabajadorForm
 )
 
-# Página de inicio
+# =======================
+# Página principal
+# =======================
 @login_required
 def home(request):
     return render(request, 'core/home.html')
 
-# Decorador común para las clases
-login_decorators = [login_required]
 
 # =======================
 # CRUD: Trabajador
 # =======================
-@method_decorator(login_decorators, name='dispatch')
-class TrabajadorList(ListView):
-    model = Trabajador
-    paginate_by = 10
-    template_name = 'core/trabajador_list.html'
+@login_required
+def lista_trabajadores(request):
+    trabajadores = Trabajador.objects.all()
+    return render(request, 'core/trabajador_list.html', {'object_list': trabajadores})
 
 
-@method_decorator(login_decorators, name='dispatch')
-class TrabajadorCreate(CreateView):
-    model = Trabajador
-    form_class = TrabajadorForm
-    template_name = 'core/trabajador_form.html'
-    success_url = reverse_lazy('core:trabajador_list')
+@login_required
+def crear_trabajador(request):
+    form = TrabajadorForm()
+    if request.method == 'POST':
+        form = TrabajadorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('core:trabajador_list')
+    return render(request, 'core/trabajador_form.html', {'form': form})
 
 
-@method_decorator(login_decorators, name='dispatch')
-class TrabajadorUpdate(UpdateView):
-    model = Trabajador
-    form_class = TrabajadorForm
-    template_name = 'core/trabajador_form.html'
-    success_url = reverse_lazy('core:trabajador_list')
+@login_required
+def editar_trabajador(request, pk):
+    trabajador = get_object_or_404(Trabajador, pk=pk)
+    form = TrabajadorForm(instance=trabajador)
+    if request.method == 'POST':
+        form = TrabajadorForm(request.POST, instance=trabajador)
+        if form.is_valid():
+            form.save()
+            return redirect('core:trabajador_list')
+    return render(request, 'core/trabajador_form.html', {'form': form})
 
 
-@method_decorator(login_decorators, name='dispatch')
-class TrabajadorDelete(DeleteView):
-    model = Trabajador
-    template_name = 'core/trabajador_confirm_delete.html'
-    success_url = reverse_lazy('core:trabajador_list')
+@login_required
+def eliminar_trabajador(request, pk):
+    trabajador = get_object_or_404(Trabajador, pk=pk)
+    if request.method == 'POST':
+        trabajador.delete()
+        return redirect('core:trabajador_list')
+    return render(request, 'core/trabajador_confirm_delete.html', {'object': trabajador})
 
 
 # =======================
 # CRUD: Asistencia
 # =======================
-@method_decorator(login_decorators, name='dispatch')
-class AsistenciaList(ListView):
-    model = Asistencia
-    paginate_by = 10
-    template_name = 'core/asistencia_list.html'
+@login_required
+def lista_asistencias(request):
+    asistencias = Asistencia.objects.all()
+    return render(request, 'core/asistencia_list.html', {'object_list': asistencias})
 
 
-@method_decorator(login_decorators, name='dispatch')
-class AsistenciaCreate(CreateView):
-    model = Asistencia
-    form_class = AsistenciaForm
-    template_name = 'core/asistencia_form.html'
-    success_url = reverse_lazy('core:asistencia_list')
+@login_required
+def crear_asistencia(request):
+    form = AsistenciaForm()
+    if request.method == 'POST':
+        form = AsistenciaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('core:asistencia_list')
+    return render(request, 'core/asistencia_form.html', {'form': form})
 
 
-@method_decorator(login_decorators, name='dispatch')
-class AsistenciaUpdate(UpdateView):
-    model = Asistencia
-    form_class = AsistenciaForm
-    template_name = 'core/asistencia_form.html'
-    success_url = reverse_lazy('core:asistencia_list')
+@login_required
+def editar_asistencia(request, pk):
+    asistencia = get_object_or_404(Asistencia, pk=pk)
+    form = AsistenciaForm(instance=asistencia)
+    if request.method == 'POST':
+        form = AsistenciaForm(request.POST, instance=asistencia)
+        if form.is_valid():
+            form.save()
+            return redirect('core:asistencia_list')
+    return render(request, 'core/asistencia_form.html', {'form': form})
 
 
-@method_decorator(login_decorators, name='dispatch')
-class AsistenciaDelete(DeleteView):
-    model = Asistencia
-    template_name = 'core/asistencia_confirm_delete.html'
-    success_url = reverse_lazy('core:asistencia_list')
+@login_required
+def eliminar_asistencia(request, pk):
+    asistencia = get_object_or_404(Asistencia, pk=pk)
+    if request.method == 'POST':
+        asistencia.delete()
+        return redirect('core:asistencia_list')
+    return render(request, 'core/asistencia_confirm_delete.html', {'object': asistencia})
 
 
 # =======================
 # CRUD: Accidente
 # =======================
-@method_decorator(login_decorators, name='dispatch')
-class AccidenteList(ListView):
-    model = Accidente
-    paginate_by = 10
-    template_name = 'core/accidente_list.html'
+@login_required
+def lista_accidentes(request):
+    accidentes = Accidente.objects.all()
+    return render(request, 'core/accidente_list.html', {'object_list': accidentes})
 
 
-@method_decorator(login_decorators, name='dispatch')
-class AccidenteCreate(CreateView):
-    model = Accidente
-    form_class = AccidenteForm
-    template_name = 'core/accidente_form.html'
-    success_url = reverse_lazy('core:accidente_list')
+@login_required
+def crear_accidente(request):
+    form = AccidenteForm()
+    if request.method == 'POST':
+        form = AccidenteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('core:accidente_list')
+    return render(request, 'core/accidente_form.html', {'form': form})
 
 
-@method_decorator(login_decorators, name='dispatch')
-class AccidenteUpdate(UpdateView):
-    model = Accidente
-    form_class = AccidenteForm
-    template_name = 'core/accidente_form.html'
-    success_url = reverse_lazy('core:accidente_list')
+@login_required
+def editar_accidente(request, pk):
+    accidente = get_object_or_404(Accidente, pk=pk)
+    form = AccidenteForm(instance=accidente)
+    if request.method == 'POST':
+        form = AccidenteForm(request.POST, instance=accidente)
+        if form.is_valid():
+            form.save()
+            return redirect('core:accidente_list')
+    return render(request, 'core/accidente_form.html', {'form': form})
 
 
-@method_decorator(login_decorators, name='dispatch')
-class AccidenteDelete(DeleteView):
-    model = Accidente
-    template_name = 'core/accidente_confirm_delete.html'
-    success_url = reverse_lazy('core:accidente_list')
+@login_required
+def eliminar_accidente(request, pk):
+    accidente = get_object_or_404(Accidente, pk=pk)
+    if request.method == 'POST':
+        accidente.delete()
+        return redirect('core:accidente_list')
+    return render(request, 'core/accidente_confirm_delete.html', {'object': accidente})
 
 
-# ===== Eficiencia =====
-@method_decorator(login_decorators, name='dispatch')
-class EficienciaList(ListView):
-    model = EficienciaTrabajador
-    paginate_by = 10
-    template_name = 'core/eficiencia_list.html'
+# =======================
+# CRUD: Eficiencia Trabajador
+# =======================
+@login_required
+def lista_eficiencia(request):
+    eficiencias = EficienciaTrabajador.objects.all()
+    return render(request, 'core/eficiencia_list.html', {'object_list': eficiencias})
 
 
-@method_decorator(login_decorators, name='dispatch')
-class EficienciaCreate(CreateView):
-    model = EficienciaTrabajador
-    form_class = EficienciaTrabajadorForm
-    template_name = 'core/eficiencia_form.html'
-    success_url = reverse_lazy('core:eficiencia_list')
+@login_required
+def crear_eficiencia(request):
+    form = EficienciaTrabajadorForm()
+    if request.method == 'POST':
+        form = EficienciaTrabajadorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('core:eficiencia_list')
+    return render(request, 'core/eficiencia_form.html', {'form': form})
 
 
-@method_decorator(login_decorators, name='dispatch')
-class EficienciaUpdate(UpdateView):
-    model = EficienciaTrabajador
-    form_class = EficienciaTrabajadorForm
-    template_name = 'core/eficiencia_form.html'
-    success_url = reverse_lazy('core:eficiencia_list')
+@login_required
+def editar_eficiencia(request, pk):
+    eficiencia = get_object_or_404(EficienciaTrabajador, pk=pk)
+    form = EficienciaTrabajadorForm(instance=eficiencia)
+    if request.method == 'POST':
+        form = EficienciaTrabajadorForm(request.POST, instance=eficiencia)
+        if form.is_valid():
+            form.save()
+            return redirect('core:eficiencia_list')
+    return render(request, 'core/eficiencia_form.html', {'form': form})
 
 
-@method_decorator(login_decorators, name='dispatch')
-class EficienciaDelete(DeleteView):
-    model = EficienciaTrabajador
-    template_name = 'core/eficiencia_confirm_delete.html'
-    success_url = reverse_lazy('core:eficiencia_list')
+@login_required
+def eliminar_eficiencia(request, pk):
+    eficiencia = get_object_or_404(EficienciaTrabajador, pk=pk)
+    if request.method == 'POST':
+        eficiencia.delete()
+        return redirect('core:eficiencia_list')
+    return render(request, 'core/eficiencia_confirm_delete.html', {'object': eficiencia})
 
 
-# ===== Desempeño =====
-@method_decorator(login_decorators, name='dispatch')
-class DesempenoList(ListView):
-    model = DesempenoTrabajador
-    paginate_by = 10
-    template_name = 'core/desempeno_list.html'
+# =======================
+# CRUD: Desempeño Trabajador
+# =======================
+@login_required
+def lista_desempeno(request):
+    desempenos = DesempenoTrabajador.objects.all()
+    return render(request, 'core/desempeno_list.html', {'object_list': desempenos})
 
 
-@method_decorator(login_decorators, name='dispatch')
-class DesempenoCreate(CreateView):
-    model = DesempenoTrabajador
-    form_class = DesempenoTrabajadorForm
-    template_name = 'core/desempeno_form.html'
-    success_url = reverse_lazy('core:desempeno_list')
+@login_required
+def crear_desempeno(request):
+    form = DesempenoTrabajadorForm()
+    if request.method == 'POST':
+        form = DesempenoTrabajadorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('core:desempeno_list')
+    return render(request, 'core/desempeno_form.html', {'form': form})
 
 
-@method_decorator(login_decorators, name='dispatch')
-class DesempenoUpdate(UpdateView):
-    model = DesempenoTrabajador
-    form_class = DesempenoTrabajadorForm
-    template_name = 'core/desempeno_form.html'
-    success_url = reverse_lazy('core:desempeno_list')
+@login_required
+def editar_desempeno(request, pk):
+    desempeno = get_object_or_404(DesempenoTrabajador, pk=pk)
+    form = DesempenoTrabajadorForm(instance=desempeno)
+    if request.method == 'POST':
+        form = DesempenoTrabajadorForm(request.POST, instance=desempeno)
+        if form.is_valid():
+            form.save()
+            return redirect('core:desempeno_list')
+    return render(request, 'core/desempeno_form.html', {'form': form})
 
 
-@method_decorator(login_decorators, name='dispatch')
-class DesempenoDelete(DeleteView):
-    model = DesempenoTrabajador
-    template_name = 'core/desempeno_confirm_delete.html'
-    success_url = reverse_lazy('core:desempeno_list')
+@login_required
+def eliminar_desempeno(request, pk):
+    desempeno = get_object_or_404(DesempenoTrabajador, pk=pk)
+    if request.method == 'POST':
+        desempeno.delete()
+        return redirect('core:desempeno_list')
+    return render(request, 'core/desempeno_confirm_delete.html', {'object': desempeno})
 
 
-@method_decorator(login_required, name='dispatch')
-class SueldoList(ListView):
-    model = SueldoTrabajador
-    paginate_by = 10
-    template_name = 'core/sueldo_list.html'
+# =======================
+# CRUD: Sueldo Trabajador
+# =======================
+@login_required
+def lista_sueldos(request):
+    sueldos = SueldoTrabajador.objects.all()
+    return render(request, 'core/sueldo_list.html', {'object_list': sueldos})
 
 
-@method_decorator(login_required, name='dispatch')
-class SueldoCreate(CreateView):
-    model = SueldoTrabajador
-    form_class = SueldoTrabajadorForm
-    template_name = 'core/sueldo_form.html'
-    success_url = reverse_lazy('core:sueldo_list')
+@login_required
+def crear_sueldo(request):
+    form = SueldoTrabajadorForm()
+    if request.method == 'POST':
+        form = SueldoTrabajadorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('core:sueldo_list')
+    return render(request, 'core/sueldo_form.html', {'form': form})
 
 
-@method_decorator(login_required, name='dispatch')
-class SueldoUpdate(UpdateView):
-    model = SueldoTrabajador
-    form_class = SueldoTrabajadorForm
-    template_name = 'core/sueldo_form.html'
-    success_url = reverse_lazy('core:sueldo_list')
+@login_required
+def editar_sueldo(request, pk):
+    sueldo = get_object_or_404(SueldoTrabajador, pk=pk)
+    form = SueldoTrabajadorForm(instance=sueldo)
+    if request.method == 'POST':
+        form = SueldoTrabajadorForm(request.POST, instance=sueldo)
+        if form.is_valid():
+            form.save()
+            return redirect('core:sueldo_list')
+    return render(request, 'core/sueldo_form.html', {'form': form})
 
 
-@method_decorator(login_required, name='dispatch')
-class SueldoDelete(DeleteView):
-    model = SueldoTrabajador
-    template_name = 'core/sueldo_confirm_delete.html'
-    success_url = reverse_lazy('core:sueldo_list')
-
-
-
+@login_required
+def eliminar_sueldo(request, pk):
+    sueldo = get_object_or_404(SueldoTrabajador, pk=pk)
+    if request.method == 'POST':
+        sueldo.delete()
+        return redirect('core:sueldo_list')
+    return render(request, 'core/sueldo_confirm_delete.html', {'object': sueldo})
