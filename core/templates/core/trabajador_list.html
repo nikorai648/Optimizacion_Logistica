@@ -9,7 +9,11 @@
   <a class="btn btn-primary" href="{% url 'core:trabajador_create' %}">Nuevo</a>
 </div>
 <table class="table table-striped">
-  <thead><tr><th>RUT</th><th>Nombre</th><th>Cargo</th><th>Turno</th><th></th></tr></thead>
+  <thead>
+    <tr>
+      <th>RUT</th><th>Nombre</th><th>Cargo</th><th>Turno</th><th>Tipo</th><th></th>
+    </tr>
+  </thead>
   <tbody>
   {% for obj in object_list %}
     <tr>
@@ -17,13 +21,14 @@
       <td>{{ obj.nombre }} {{ obj.apellido }}</td>
       <td>{{ obj.cargo }}</td>
       <td>{{ obj.get_turno_display }}</td>
+      <td>{% if obj.tipo %}{{ obj.tipo.rol_cargo }} ({{ obj.tipo.tipo_contrato }}){% else %}-{% endif %}</td>
       <td class="text-end">
         <a class="btn btn-sm btn-secondary" href="{% url 'core:trabajador_update' obj.pk %}">Editar</a>
         <a class="btn btn-sm btn-danger" href="{% url 'core:trabajador_delete' obj.pk %}">Eliminar</a>
       </td>
     </tr>
   {% empty %}
-    <tr><td colspan="5">Sin registros</td></tr>
+    <tr><td colspan="6">Sin registros</td></tr>
   {% endfor %}
   </tbody>
 </table>
