@@ -3,7 +3,7 @@
 <h3>Eliminar Asistencia</h3>
 <p>
   ¿Eliminar el registro de
-  <strong>{{ object.trabajador_nombre }} {{ object.trabajador_apellido }} ({{ object.trabajador_rut }})</strong>
+  <strong>{{ object.trabajador.nombre }} {{ object.trabajador.apellido }} ({{ object.trabajador.rut }})</strong>
   del <strong>{{ object.fecha }}</strong>?
 </p>
 <form method="post">{% csrf_token %}
