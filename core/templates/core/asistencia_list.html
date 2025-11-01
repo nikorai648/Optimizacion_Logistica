@@ -21,8 +21,8 @@
   {% for obj in object_list %}
     <tr>
       <td>{{ obj.fecha }}</td>
-      <td>{{ obj.trabajador_nombre }} {{ obj.trabajador_apellido }}</td>
-      <td>{{ obj.trabajador_rut }}</td>
+      <td>{{ obj.trabajador.nombre }} {{ obj.trabajador.apellido }}</td>
+      <td>{{ obj.trabajador.rut }}</td>
       <td>{{ obj.get_estado_display }}</td>
       <td>{{ obj.minutos_atraso }}</td>
       <td>{{ obj.horas_extras }}</td>
