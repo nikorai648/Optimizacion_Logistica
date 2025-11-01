@@ -2,47 +2,56 @@
 from django.urls import path
 from . import views
 
-app_name = 'core'  # permite usar nombres como core:trabajador_list
+app_name = 'core'
 
 urlpatterns = [
     path('', views.home, name='home'),
 
-    # Trabajador
-    path('trabajadores/', views.TrabajadorList.as_view(), name='trabajador_list'),
-    path('trabajadores/nuevo/', views.TrabajadorCreate.as_view(), name='trabajador_create'),
-    path('trabajadores/<int:pk>/editar/', views.TrabajadorUpdate.as_view(), name='trabajador_update'),
-    path('trabajadores/<int:pk>/eliminar/', views.TrabajadorDelete.as_view(), name='trabajador_delete'),
+    # =======================
+    # Rutas CRUD: Trabajador
+    # =======================
+    path('trabajadores/', views.lista_trabajadores, name='trabajador_list'),
+    path('trabajadores/nuevo/', views.crear_trabajador, name='trabajador_create'),
+    path('trabajadores/<int:pk>/editar/', views.editar_trabajador, name='trabajador_update'),
+    path('trabajadores/<int:pk>/eliminar/', views.eliminar_trabajador, name='trabajador_delete'),
 
-    # Asistencia
-    path('asistencias/', views.AsistenciaList.as_view(), name='asistencia_list'),
-    path('asistencias/nueva/', views.AsistenciaCreate.as_view(), name='asistencia_create'),
-    path('asistencias/<int:pk>/editar/', views.AsistenciaUpdate.as_view(), name='asistencia_update'),
-    path('asistencias/<int:pk>/eliminar/', views.AsistenciaDelete.as_view(), name='asistencia_delete'),
+    # =======================
+    # Rutas CRUD: Asistencia
+    # =======================
+    path('asistencias/', views.lista_asistencias, name='asistencia_list'),
+    path('asistencias/nueva/', views.crear_asistencia, name='asistencia_create'),
+    path('asistencias/<int:pk>/editar/', views.editar_asistencia, name='asistencia_update'),
+    path('asistencias/<int:pk>/eliminar/', views.eliminar_asistencia, name='asistencia_delete'),
 
-    # Accidente
-    path('accidentes/', views.AccidenteList.as_view(), name='accidente_list'),
-    path('accidentes/nuevo/', views.AccidenteCreate.as_view(), name='accidente_create'),
-    path('accidentes/<int:pk>/editar/', views.AccidenteUpdate.as_view(), name='accidente_update'),
-    path('accidentes/<int:pk>/eliminar/', views.AccidenteDelete.as_view(), name='accidente_delete'),
+    # =======================
+    # Rutas CRUD: Accidente
+    # =======================
+    path('accidentes/', views.lista_accidentes, name='accidente_list'),
+    path('accidentes/nuevo/', views.crear_accidente, name='accidente_create'),
+    path('accidentes/<int:pk>/editar/', views.editar_accidente, name='accidente_update'),
+    path('accidentes/<int:pk>/eliminar/', views.eliminar_accidente, name='accidente_delete'),
 
-    # Eficiencia
-    path('eficiencia/', views.EficienciaList.as_view(), name='eficiencia_list'),
-    path('eficiencia/nueva/', views.EficienciaCreate.as_view(), name='eficiencia_create'),
-    path('eficiencia/<int:pk>/editar/', views.EficienciaUpdate.as_view(), name='eficiencia_update'),
-    path('eficiencia/<int:pk>/eliminar/', views.EficienciaDelete.as_view(), name='eficiencia_delete'),
+    # =======================
+    # Rutas CRUD: Eficiencia
+    # =======================
+    path('eficiencia/', views.lista_eficiencia, name='eficiencia_list'),
+    path('eficiencia/nueva/', views.crear_eficiencia, name='eficiencia_create'),
+    path('eficiencia/<int:pk>/editar/', views.editar_eficiencia, name='eficiencia_update'),
+    path('eficiencia/<int:pk>/eliminar/', views.eliminar_eficiencia, name='eficiencia_delete'),
 
-    # Desempeño
-    path('desempeno/', views.DesempenoList.as_view(), name='desempeno_list'),
-    path('desempeno/nuevo/', views.DesempenoCreate.as_view(), name='desempeno_create'),
-    path('desempeno/<int:pk>/editar/', views.DesempenoUpdate.as_view(), name='desempeno_update'),
-    path('desempeno/<int:pk>/eliminar/', views.DesempenoDelete.as_view(), name='desempeno_delete'),
+    # =======================
+    # Rutas CRUD: Desempeño
+    # =======================
+    path('desempeno/', views.lista_desempeno, name='desempeno_list'),
+    path('desempeno/nuevo/', views.crear_desempeno, name='desempeno_create'),
+    path('desempeno/<int:pk>/editar/', views.editar_desempeno, name='desempeno_update'),
+    path('desempeno/<int:pk>/eliminar/', views.eliminar_desempeno, name='desempeno_delete'),
 
-
-    # SueldoTrabajador
-    path('sueldos/', views.SueldoList.as_view(), name='sueldo_list'),
-    path('sueldos/nuevo/', views.SueldoCreate.as_view(), name='sueldo_create'),
-    path('sueldos/<int:pk>/editar/', views.SueldoUpdate.as_view(), name='sueldo_update'),
-    path('sueldos/<int:pk>/eliminar/', views.SueldoDelete.as_view(), name='sueldo_delete'),
-
-
+    # =======================
+    # Rutas CRUD: Sueldos
+    # =======================
+    path('sueldos/', views.lista_sueldos, name='sueldo_list'),
+    path('sueldos/nuevo/', views.crear_sueldo, name='sueldo_create'),
+    path('sueldos/<int:pk>/editar/', views.editar_sueldo, name='sueldo_update'),
+    path('sueldos/<int:pk>/eliminar/', views.eliminar_sueldo, name='sueldo_delete'),
 ]
