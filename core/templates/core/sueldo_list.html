@@ -8,25 +8,31 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>RUT</th><th>Nombre</th><th>Mes</th><th>Trabajos/mes</th><th>Sueldo total</th><th></th>
+      <th>RUT</th><th>Nombre</th><th>Mes</th>
+      <th>Trabajos/mes</th><th>Sueldo total</th><th>Eficiencia</th><th></th>
     </tr>
   </thead>
   <tbody>
   {% for obj in object_list %}
     <tr>
-      <td>{{ obj.trabajador_rut }}</td>
-      <td>{{ obj.trabajador_nombre }}</td>
+      <td>{{ obj.trabajador.rut }}</td>
+      <td>{{ obj.trabajador.nombre }} {{ obj.trabajador.apellido }}</td>
       <td>{{ obj.mes }}</td>
       <td>{{ obj.cantidad_trabajos_mes }}</td>
       <td>{{ obj.sueldo_total_mes }}</td>
+      <td>
+        {% if obj.eficiencia %}
+          {{ obj.eficiencia.id_eficiencia }} ({{ obj.eficiencia.trabajos_completados_en_1_mes }} t.)
+        {% else %}-{% endif %}
+      </td>
       <td class="text-end">
         <a class="btn btn-sm btn-secondary" href="{% url 'core:sueldo_update' obj.pk %}">Editar</a>
         <a class="btn btn-sm btn-danger" href="{% url 'core:sueldo_delete' obj.pk %}">Eliminar</a>
       </td>
     </tr>
    {% empty %}
-    <tr><td colspan="6">Sin registros</td></tr>
+    <tr><td colspan="7">Sin registros</td></tr>
   {% endfor %}
   </tbody>
 </table>
-{% endblock %}   
+{% endblock %}
