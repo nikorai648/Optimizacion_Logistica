@@ -22,8 +22,7 @@ class Trabajador(models.Model):
     telefono = models.CharField(max_length=20, blank=True)
 
     # relación con TipoTrabajador
-    tipo = models.ForeignKey(TipoTrabajador, on_delete=models.PROTECT, related_name='trabajadores')
-
+    tipo = models.ForeignKey('core.TipoTrabajador', on_delete=models.PROTECT, related_name='trabajadores')
     # datos laborales
     area = models.CharField(max_length=60, blank=True)
     turno = models.CharField(max_length=20, choices=[
