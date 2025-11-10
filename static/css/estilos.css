@@ -13,7 +13,7 @@ body {
   position: fixed;
   top: 15px;
   right: 20px;
-  width: 120px;      /* ajusta el tamaño */
+  width: 30px;      /* ajusta el tamaño */
   z-index: 2000;     /* queda encima del navbar */
   border-radius: 8px; /* opcional, esquinas redondeadas */
 }
