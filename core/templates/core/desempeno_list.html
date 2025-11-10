@@ -1,27 +1,34 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-3">
   <div class="d-flex align-items-center">
     <img src="{% static 'img/desempeno.jpg' %}" class="icono-listado" alt="Desempeño">
-  <h3>Desempeño de Trabajador</h3>
-  <a class="btn btn-primary" href="{% url 'core:desempeno_create' %}">Nuevo</a>
+    <h3 class="mb-0 ms-2">Desempeño de Trabajador</h3>
   </div>
+  <a class="btn btn-primary" href="{% url 'core:desempeno_create' %}">Nuevo</a>
 </div>
+
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>RUT</th><th>Nombre</th><th>ID Desempeño</th>
-      <th>Forma de hacer trabajos</th><th>Posibles quejas</th><th></th>
+      <th>RUT</th>
+      <th>Nombre</th>
+      <th>ID Desempeño</th>
+      <th>Forma de hacer trabajos</th>
+      <th>Posibles quejas</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     {% for obj in object_list %}
       <tr>
-        <td>{{ obj.trabajador_rut }}</td>
-        <td>{{ obj.trabajador_nombre }}</td>
+        <td>{{ obj.trabajador.rut }}</td>
+        <td>{{ obj.trabajador.nombre }} {{ obj.trabajador.apellido }}</td>
         <td>{{ obj.id_desempeno }}</td>
-        <td>{{ obj.forma_de_hacer_trabajos }}</td>
-        <td>{{ obj.posibles_quejas }}</td>
+        <td>{{ obj.forma_de_hacer_trabajos|default:"-" }}</td>
+        <td>{{ obj.posibles_quejas|default:"-" }}</td>
         <td class="text-end">
           <a class="btn btn-sm btn-secondary" href="{% url 'core:desempeno_update' obj.pk %}">Editar</a>
           <a class="btn btn-sm btn-danger" href="{% url 'core:desempeno_delete' obj.pk %}">Eliminar</a>
